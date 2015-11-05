@@ -1,0 +1,106 @@
+# hughsPark
+
+
+<html>
+	<h1>Remedy+</h1>
+
+	<form form action="letter_generator.html" onsubmit="functionMain('defaultLetter')">
+		Contact:<br>
+		<input id="userName" type="text" name="User Name" value="Bob">
+		<br>
+		Summary:<br>
+		<input id="summary" type="text" name="summary" style="width: 80%;" value="#AC EMAIL - User unable to send an email as is a not connected to a network">
+		<br>
+		Submitter:<br>
+		<input id="submitter" type="text" name="Submitter" value="Oliver">
+		<br>
+	<input type="submit">
+
+	</form>
+
+	<script>
+
+
+//document.getElementById("summary");
+function getText(elementID) {
+	//convert summary to assoc array
+	strElementValue = "Default Value";
+	if (document.getElementById(elementID) !== null) {
+		strElementValue = document.getElementById(elementID).value;
+    };
+    //rawElement = "HI";
+    //alert(strElement);
+	return strElementValue;
+}
+
+
+//getElement("userName");
+
+function functionMain(letterType) {
+	//Main function runs all.
+	
+	//alert("functionMain()");
+	
+	strSummary = getText("summary");
+	strName = getText("userName");
+	strSubmitter= getText("submitter");
+	var objTemplates = {defaultLetter: "Dear %NAME%, \n \n Please can you contact us about %SUMMARY%. \n \n Thanks, \n \n %SUBMITTER%", apvLetter : "Dear %NAME%,  \n \n  Please can you fill in an exceptions form for %SUMMARY%.  \n \n Thanks,  \n \n  %SUBMITTER%"};
+	
+	alert(echoLetter(strSummary, strName, strSubmitter, objTemplates[letterType]));
+
+	return;
+}
+
+function generateArray(summary, KeysList) {
+	//Return Asoc Array check KeysList and generate key:values
+	//KeysList will have to pick the splitters
+	if (typeof KeysList === 'undefined') { optionalArg = 'index'; }
+	
+	objSummary = summary.split(' ');
+
+	return arrSummary;
+}
+
+function decideOnLetter(objSummary, letterRules) {
+	//
+	
+	strLetter = objToString(objSummary);
+	return strLetter;
+
+	
+}
+
+function echoLetter(strSummary, strName, strSubmitter, strTemplate) {
+	//
+	replacements = {"%SUMMARY%":strSummary, "%NAME%":strName, "%SUBMITTER%":strSubmitter};
+	//console.log(replacements["%SUMMARY%"]);
+	//console.log(strSummary);
+	str = strTemplate;
+
+	strLetterMerge = str.replace(/%\w+%/g, function(all) {
+		return replacements[all] || all;
+	});
+	
+	//strx = (strLetter + " " + strName + " " + strTemplate);
+	return strLetterMerge;
+}
+
+
+function objToString (obj) {
+    var str = '';
+    for (var p in obj) {
+        if (obj.hasOwnProperty(p)) {
+            str += p + '::' + obj[p] + '\n';
+        }
+    }
+    return str;
+}
+</script>
+</html>
+
+
+
+
+
+
+
